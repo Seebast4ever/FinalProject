@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Polygon;
 
 public class World extends JFrame implements ActionListener {
     private Container pane;
@@ -15,9 +16,15 @@ public class World extends JFrame implements ActionListener {
 
 	pane = this.getContentPane();
 	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+
+	
     }
 
-    public World(String title, int sizex, int sizey, int locationx, int locationy) {
+
+
+
+    
+    /*    public World(String title, int sizex, int sizey, int locationx, int locationy) {
 	this.setTitle(title);
 	this.setSize(sizex, sizey);
 	this.setLocation(locationx, locationy);
@@ -25,7 +32,7 @@ public class World extends JFrame implements ActionListener {
 
 	pane = this.getContentPane();
 	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
-    }
+	} */
 
 
     
