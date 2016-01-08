@@ -16,8 +16,13 @@ public class World extends JFrame implements ActionListener {
 
 	pane = this.getContentPane();
 	pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+    }
 
-	
+    public void paintHex(Graphics g) {
+	int[] x = new int[] {0, 1, 1, 0};
+	int[] y = new int[] {0, 0, 1, 1};
+	Polygon hex1 = new Polygon(x, y, 4);
+	g.drawPolygon(hex1);
     }
 
 
