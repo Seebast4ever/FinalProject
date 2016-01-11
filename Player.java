@@ -8,7 +8,7 @@ public class player{//creates player object
     int[numGrain, numBricks, numWool, numWood, numOre] hand;
     
     public static void main(String[]args){
-	if (numOfPlayers = 2){
+	if(numOfPlayers = 2){
 	    int[] player1 = new player[];
 	    int[] player2 = new player[];
 	}
