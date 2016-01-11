@@ -5,7 +5,7 @@ public class Hexagon{
     private int[] numGivePlayers; //number of items to give player -- index 0 = player 1
     //may want 2 arrays, one to keep track of vertex, one to keep track of sides
     public Hexagon(int identity, int prodNum, String prod, int numPlayers) {
-	ID = indentity;
+	ID = identity;
 	productionNum = prodNum;
 	produce = prod;
 	numGivePlayers = new int[numPlayers];
@@ -14,12 +14,11 @@ public class Hexagon{
     public Hexagon() {
 	this(-1, 0, "", 10);
     }
-
     public int getID() {return ID;}
-    public int getProductionNum() {return ProductionNum};
-    public String getProduce() {return produce};
-    public int[] getArray() {return numGivePlayers};
-    public int[] getNumGivePlayers() {return getArray()};
+    public int getProductionNum() {return productionNum;}
+    public String getProduce() {return produce;}
+    public int[] getArray() {return numGivePlayers;}
+    public int[] getNumGivePlayers() {return getArray();}
 
     //player 1 = index 0
     public void addSettlement(int player) {
