@@ -11,6 +11,17 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/*
+  1. Create line object that holds starting, ending, and color
+  2. Create a container that holds all lines (use arrayList Lines)
+  3. In AddLine put one more line in the arrayList, and repaint
+    3a. in repaint, call paintComponent (overridden) that loops through linked list and creates each one
+
+notes: can use arrayList size 6, make a class hexagon with arrayList, 
+arrayList of hexagons????
+*/
+
+
 public class Test2 extends JComponent{
 
     
@@ -35,19 +46,19 @@ public class Test2 extends JComponent{
     //A linked list of lines
     private final LinkedList<Line> lines = new LinkedList<Line>();
 
-    //calls below function
+    //repaints
     public void addLine(int x1, int x2, int x3, int x4) {
 	addLine(x1, x2, x3, x4, Color.black);
     }
 
     //calls repaint
     public void addLine(int x1, int x2, int x3, int x4, Color color) {
-	lines.add(new Line(x1,x2,x3,x4, color));        
+       	lines.add(new Line(x1,x2,x3,x4, color));        
 	repaint();
     }
 
     public void clearLines() {
-	lines.clear();
+       	lines.clear();
 	repaint();
     }
 
@@ -62,7 +73,7 @@ public class Test2 extends JComponent{
 
     public static void main(String[] args) {
 	JFrame testFrame = new JFrame();
-	testFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	final Test2 comp = new Test2();
 	comp.setPreferredSize(new Dimension(320, 200));
 	testFrame.getContentPane().add(comp, BorderLayout.CENTER);
