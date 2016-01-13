@@ -14,11 +14,26 @@ public class Hexagon{
     public Hexagon() {
 	this(-1, 0, "", 10);
     }
-    public int getID() {return ID;}
-    public int getProductionNum() {return productionNum;}
-    public String getProduce() {return produce;}
-    public int[] getArray() {return numGivePlayers;}
-    public int[] getNumGivePlayers() {return getArray();}
+
+    public int getID(){
+	return ID;
+    }
+
+    public int getProductionNum(){
+	return productionNum;
+    }
+
+    public String getProduce(){
+	return produce;
+    }
+
+    public int[] getArray(){
+	return numGivePlayers;
+    }
+
+    public int[] getNumGivePlayers(){
+	return getArray();
+    }
 
     //player 1 = index 0
     public void addSettlement(int player) {
