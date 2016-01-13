@@ -39,6 +39,11 @@ public class DrawHex extends JComponent {
 	private Coordinate c1;
 	private Coordinate c2;
 
+	public Line(Coordinate c1, Coordinate c2) {
+	    this.c1 = c1;
+	    this.c2 = c2;
+	}
+
 	public Line(int x1, int y1, int x2, int y2) {
 	    c1.setXY(x1, y1);
 	    c2.setXY(x2, y2);
@@ -49,6 +54,11 @@ public class DrawHex extends JComponent {
     //stores structure of each hexagon
     public static class Hexagon {
 	private ArrayList<Line> lineList;
+
+	public Hexagon(Coordinate c1, Coordinate c2, Coordinate c3, Coordinate c4, Coordinate c5, Coordinate c6) {
+	    this(new Line(c1, c2), new Line(c2, c3), new Line(c3, c4),
+		 new Line(c4, c5), new Line(c5, c6), new Line(c6, c1));
+	}
 
 	public Hexagon(Line L1, Line L2, Line L3, Line L4, Line L5, Line L6) {
 	    lineList = new ArrayList<Line>(6);
@@ -93,7 +103,7 @@ public class DrawHex extends JComponent {
 	      c15 = new Coordinate(, );*/
 
 
-	//---------------CREATES A GRID OF 1 AND 0, 1 = VERTICIES OF HEXAGONS ----
+	//-------CREATES A GRID OF 1 AND 0, 1 = VERTICIES OF HEXAGONS ----
 	//for a 3-4-3 hex
 
 	//creates an array of points -- 1 = on, 0 = off.
@@ -124,7 +134,7 @@ public class DrawHex extends JComponent {
 	    }
 	}
 
-	//----------LOOKS AT ABOVE GRID AND MATCHES TO ARRAY OF COORDINATES------
+	//----------RECORDS VERTECIES OF HEXAGONS------
 
 	//records points from left to right
 	Coordinate[] cor = new Coordinate[30];
@@ -138,5 +148,25 @@ public class DrawHex extends JComponent {
 	    }
 	}
     
+    }
+
+
+    //requires coordinates of vertecies of hexagons
+    public static Hexagon[] makeHexagon(Coordinate[] points) {
+	Hexagon[] hexes = new Hexagon[10];
+	hexes[0] = new Hexagon(points[0], points[3], points[4], points[7], points[8], points[11]);
+	hexes[1] = new Hexagon(points[1], points[4], points[5], points[8], points[9], points[12]);
+	hexes[2] = new Hexagon(points[2], points[5], points[6], points[9], points[10], points[13]);
+	
+	hexes[3] = new Hexagon(points[7], points[11], points[12], points[16], points[17], points[21]);
+	hexes[4] = new Hexagon(points[8], points[12], points[13], points[17], points[18], points[22]);
+	hexes[5] = new Hexagon(points[9], points[13], points[14], points[18], points[19], points[23]);
+	hexes[6] = new Hexagon(points[10], points[14], points[15], points[19], points[20], points[24]);
+
+	hexes[7] = new Hexagon(points[17], points[21], points[22], points[25], points[26], points[29]);
+	hexes[8] = new Hexagon(points[18], points[22], points[23], points[26], points[27], points[30]);
+	hexes[9] = new Hexagon(points[19], points[23], points[24], points[27], points[28], points[31]);
+	
+	return hexes;
     }
 }
