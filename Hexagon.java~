@@ -1,5 +1,5 @@
 public class Hexagon{
-    private int ID; //in 3-4-3 format, ID = 0 top left, 2 top right, 7 bottom left, 9 bottom right
+    private int ID; //in 3-4-3 format, ID = 0 top left, 2 top right, 7 bot left, 9 bot right
     private int productionNum; //number for production
     private String produce; //item that gets produced
     private int[] numGivePlayers; //number of items to give player -- index 0 = player 1
