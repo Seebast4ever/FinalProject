@@ -19,7 +19,11 @@ public class player{//creates player object
     int numOre4 = 0;
     int numGrain4 = 0;
     int numLumber4 = 0;
-
+    
+    String roadError = "You do not have enough materials to purchase a road! Please check your hand again and make another choice";//error message that prints when the player doesnt have enough resources to buy a road
+    String settlementError = "You do not have enough materials to purchase a settlement! Please check your hand again and make another choice";//error message that prints when the player doesnt have enough resources to buy a settlement
+    String cityError = "You do not have enough materials to purchase a city! Please check your hand again and make another choice";//error message that prints when the player doesnt have enough resources to buy a city
+    
     int numOfPlayers = 2;//will be set to a variable coming from the button
 
     
@@ -50,7 +54,63 @@ public class player{//creates player object
 	    player2.hand[3] = numGrain2;
 	    player2.hand[4] = numLumber2;
 	    //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
-	   
+	    
+	}
+    }
+    public boolean p1CanPurchaseRoad(){
+	if(player1.hand[0] <= 1 && player1.hand[4] <= 1){
+	    numBrick1 = numBrick1 - 1;
+	    numLumber1 = numLumber1 - 1;
+	    player1.hand[0] = numBrick1;
+	    player1.hand[4] = numLumber1;
+	    return true;
+	}else{
+	    System.out.println(roadError);//need to be printed to a GUI label, not the terminal
+	    return false;
+	}
+    }
+    public boolean p2CanPurchaseRoad(){
+	if(player2.hand[0] <= 1 && player2.hand[4] <= 1){
+	    numBrick2 = numBrick2 - 1;
+	    numLumber2 = numLumber2 - 1;
+	    player2.hand[0] = numBrick2;
+	    player2.hand[4] = numLumber2;
+	    return true;
+	}else{
+	    System.out.println(roadError);//GUI label, not terminal
+	    return false;
+	}
+    }
+    public boolean p1CanPurchaseSettlement(){
+	if(player1.hand[0] >= 1 && player1.hand[1] >= 1 && player1.hand[3] >= 1 && player1.hand >= 1){
+	    numBrick1 = numBrick1 - 1;
+	    numWool1 = numWool1 - 1;
+	    numGrain1 = numGrain1 - 1;
+	    numLumber1 = numLumber1 - 1;
+	    player1.hand[0] = numBrick1;
+	    player1.hand[1] = numWool1;
+	    player1.hand[3] = numGrain1;
+	    player1.hand[4] = numLumber1;
+	    return true;
+	}else{
+	    System.out.println(settlementError);//GUI label, not terminal
+	    return false;
+	}
+    }
+    public boolean p2CanPurchaseSettlement(){
+	if(player2.hand[0] >= 1 && player2.hand[1] >= 1 && player2.hand[3] >= 1 && player2.hand >= 1){
+	    numBrick2 = numBrick2 - 1;
+	    numWool2 = numWool2 - 1;
+	    numGrain2 = numGrain2 - 1;
+	    numLumber2 = numLumber2 - 1;
+	    player2.hand[0] = numBrick2;
+	    player2.hand[1] = numWool2;
+	    player2.hand[3] = numGrain2;
+	    player2.hand[4] = numLumber2;
+	    return true;
+	}else{
+	    System.out.println(settlementError);//GUI label, not terminal
+	    return false;
 	}
     }
 }
