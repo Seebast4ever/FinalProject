@@ -52,20 +52,9 @@ public class World implements ActionListener {
 	p.add(l2, c);
 	//puts this panel (and all its features) west
 	f.add(p, BorderLayout.WEST);
-	
+
+
     }
-
-    /*   public void paintHex(Graphics g) {
-	int[] x = new int[] {0, 1, 1, 0};
-	int[] y = new int[] {0, 0, 1, 1};
-	Polygon hex1 = new Polygon(x, y, 4);
-	g.drawPolygon(hex1);
-	} */
-
-
-
-
-    
     /*    public World(String title, int sizex, int sizey, int locationx, int locationy) {
 	this.setTitle(title);
 	this.setSize(sizex, sizey);
