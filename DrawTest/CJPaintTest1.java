@@ -88,6 +88,8 @@ public class CJPaintTest1 extends JComponent {
 		public void actionPerformed(ActionEvent e) {
 		    comp.addHexagon(10, 20, 20);
 		    comp.addHexagon(100, 250, 250);
+		    comp.addLine(0, 0, 100, 0);
+		    comp.addLine(0, 100, 0, 0);
 		}
 	    }
 	    
