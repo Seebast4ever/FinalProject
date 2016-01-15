@@ -62,7 +62,24 @@ public class MakeTiles extends JComponent {
 
 	//----------RECORDS VERTECIES OF HEXAGONS------
 
-    public static Coordinate[] points(int[][] pointGrid) {
+    public static Coordinate[] points(int[][] pointGrid, int xinit, int yinit) {
+	//records points from left to right
+	Coordinate[] cor = new Coordinate[32];
+	//keeps track of index of coordinate array
+	int count = 0;
+	for (int i = 0; i < pointGrid.length; i++) {
+	    for (int j = 0; j < pointGrid[i].length; j++) {
+		if (pointGrid[i][j] == 1) {
+		    cor[count] = new Coordinate(j+xinit, i+yinit);
+		    count++;
+		}
+	    }
+	}
+	return cor;
+    }
+
+    //without initial (x,y) values
+        public static Coordinate[] points(int[][] pointGrid) {
 	//records points from left to right
 	Coordinate[] cor = new Coordinate[32];
 	//keeps track of index of coordinate array

@@ -55,7 +55,7 @@ public class Temp extends JComponent {
     //creates a hexagon with vertex 1 at (p1x, p1y) and sides of ratio
     public void addHexagon() {
 	int[][] gridPoint = MakeTiles.pointGrid(51);
-	Coordinate[] points = MakeTiles.points(gridPoint);
+	Coordinate[] points = MakeTiles.points(gridPoint, 100, 50);
 	Hexagon[] hexes = MakeTiles.makeHexagon(points);
 	printHexCoordinates(hexes[0]);
        	for (int i = 0; i < hexes.length; i++) {
