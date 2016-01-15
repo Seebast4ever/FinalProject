@@ -11,9 +11,16 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class DrawHex extends JComponent {
+/*
+  Solely creates an array of hexagons with proper coordinates, but only between the points 0 <= x <= 8 and 0 <= y <= 7 
+  edit: added a ratio
+*/
 
-    public static int[][] pointGrid() {
+
+public class MakeTiles extends JComponent {
+
+    //
+    public static int[][] pointGrid(int ratio) {
 
 	//-------CREATES A GRID OF 1 AND 0, 1 = VERTICIES OF HEXAGONS ----
 	//for a 3-4-3 hex
@@ -52,13 +59,14 @@ public class DrawHex extends JComponent {
 
     public static Coordinate[] points(int[][] pointGrid) {
 	//records points from left to right
-	Coordinate[] cor = new Coordinate[30];
+	Coordinate[] cor = new Coordinate[32];
 	//keeps track of index of coordinate array
 	int count = 0;
 	for (int i = 0; i < pointGrid.length; i++) {
 	    for (int j = 0; j < pointGrid[i].length; j++) {
 		if (pointGrid[i][j] == 1) {
 		    cor[count] = new Coordinate(i, j);
+		    count++;
 		}
 	    }
 	}
@@ -87,5 +95,30 @@ public class DrawHex extends JComponent {
 	hexes[9] = new Hexagon(points[19], points[23], points[24], points[27], points[28], points[31]);
 	
 	return hexes;
+    }
+
+    public static void main(String[]args) {
+	int[][] pointAry = pointGrid();
+	String ans = "[";
+	for (int i = 0; i < pointAry.length; i++) {
+	    ans += "\n[ ";
+	    for (int j = 0; j < pointAry[i].length; j++) {
+		ans += pointAry[i][j]+", ";
+	    }
+	    ans += "]";
+	}
+	System.out.println(ans + "\n]");
+
+	Coordinate[] corArray = points(pointAry);
+	System.out.print("[");
+	for (int i = 0; i < corArray.length; i++) {
+	    System.out.print(corArray[i]+", ");
+	}
+
+	Hexagon[] hexArray = makeHexagon(corArray);
+	System.out.print("[");
+	for (int i = 0; i < hexArray.length; i++) {
+	    System.out.print(hexArray[i]+", ");
+	}
     }
 }

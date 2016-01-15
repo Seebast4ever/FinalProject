@@ -25,5 +25,19 @@ public class Hexagon {
     public Hexagon(int x1, int y1, int x2, int y2, int x3, int y3,
 		   int x4, int y4, int x5, int y5, int x6, int y6) {
 	this(new Coordinate(x1, y1), new Coordinate(x2, y2), new Coordinate(x3, y3), new Coordinate(x4, y4), new Coordinate(x5, y5), new Coordinate(x6, y6));
-	     }
     }
+
+    public ArrayList<Line> getLineList() {
+	return lineList;
+    }
+
+    public Line getLine(int i) {
+	return lineList.get(i);
+    }
+
+    public int getLineListLength() {
+	return lineList.size();
+    }
+}
+
+

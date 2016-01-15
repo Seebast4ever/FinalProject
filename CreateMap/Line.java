@@ -11,4 +11,18 @@ public class Line {
 	c1.setXY(x1, y1);
 	c2.setXY(x2, y2);		
     }
+
+    public Coordinate getC1() {
+	return c1;
+    }
+
+    public Coordinate getC2() {
+	return c2;
+    }
+
+    public int getX1() {return c1.getX();}
+    public int getX2() {return c2.getX();}
+    public int getY1() {return c1.getY();}
+    public int getY2() {return c2.getY();}
+
 }
