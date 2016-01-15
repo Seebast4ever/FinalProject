@@ -19,10 +19,21 @@ public class player{//creates player object
     int numOre4 = 0;
     int numGrain4 = 0;
     int numLumber4 = 0;
+
+    int p1VictoryPoints = 2;//sets the number of Victory Points to two, as each player places two settlements to begin the game. Players need 10 Victory Points to win, with Settlements adding 1 point per construction and Cities being worth 2 points, though they replace existing Settlements and as such only add one to the current amount of points
+    int p2VictoryPoints = 2;
+    int p3VictoryPoints = 2;
+    int p4VictoryPoints = 2;
+    
     
     String roadError = "You do not have enough materials to purchase a road! Please check your hand again and make another choice";//error message that prints when the player doesnt have enough resources to buy a road
     String settlementError = "You do not have enough materials to purchase a settlement! Please check your hand again and make another choice";//error message that prints when the player doesnt have enough resources to buy a settlement
     String cityError = "You do not have enough materials to purchase a city! Please check your hand again and make another choice";//error message that prints when the player doesnt have enough resources to buy a city
+    
+    String p1Win = "Player 1 has won! Good game!";//Win message for Player 1
+    String p2Win = "Player 2 has won! Good game!";//Win message for Player 2
+    String p3Win = "Player 3 has won! Good game!";//Win message for Player 3
+    String p4Win = "Player 4 has won! Good game!";//Win message for Player 4
     
     int numOfPlayers = 2;//will be set to a variable coming from the button
 
@@ -38,9 +49,12 @@ public class player{//creates player object
     }
     
     public static void main(String[]args){
-	if(numOfPlayers = 2){//requires button "number of players(2)"  to set numOfPlayers to 2
-	    player player1 = new player();//creates a new player, player1 with an empty hand
-	    player player2 = new player();//creates a new player, player2 with an empty hand
+	if(numOfPlayers = 2){
+	    //requires button "number of players(2)"  to set numOfPlayers to 2
+	    player player1 = new player();
+	    //creates a new player, player1 with an empty hand
+	    player player2 = new player();
+	    //creates a new player, player2 with an empty hand
 	    
 	    player1.hand[0] = numBrick1;
 	    player1.hand[1] = numWool1;
@@ -55,6 +69,13 @@ public class player{//creates player object
 	    player2.hand[4] = numLumber2;
 	    //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
 	    
+	}
+    }
+    public boolean victoryPoints(){
+	if(p1VictoryPoints >= 10){
+	    return true;
+	}else if(p2VictoryPoints >= 10){
+	    return true;
 	}
     }
     public boolean p1CanPurchaseRoad(){
@@ -91,6 +112,10 @@ public class player{//creates player object
 	    player1.hand[1] = numWool1;
 	    player1.hand[3] = numGrain1;
 	    player1.hand[4] = numLumber1;
+	    p1VictoryPoints += 1;
+	    if(victoryPoints() == true){
+		System.out.println(p1Win);
+	    }
 	    return true;
 	}else{
 	    System.out.println(settlementError);//GUI label, not terminal
@@ -107,11 +132,47 @@ public class player{//creates player object
 	    player2.hand[1] = numWool2;
 	    player2.hand[3] = numGrain2;
 	    player2.hand[4] = numLumber2;
+	    p2VictoryPoints += 1;
+	    if(victoryPoints() == true){
+		System.out.println(p2Win);
+	    }
 	    return true;
 	}else{
 	    System.out.println(settlementError);//GUI label, not terminal
 	    return false;
 	}
     }
+    public boolean p1CanPurchaseCity(){
+	if(player1.hand[2] >= 3 && player1.hand[3] >= 2){
+	    numOre1 = numOre1 - 3;
+	    numGrain1 = numGrain1 - 2;
+	    player1.hand[2] = numOre1;
+	    player1.hand[3] = numGrain1;
+	    p1VictoryPoints += 1;
+	    if(victoryPoints() == true){
+		System.out.println(p1Win);
+	    }
+	    return true;
+	}else{
+	    System.out.println(cityError);
+	    return false;
+	}
+    }  
+    public boolean p2CanPurchaseCity(){
+	if(player2.hand[2] >= 3 && player2.hand[3] >= 2){
+	    numOre2 = numOre2 - 3;
+	    numGrain2 = numGrain2 - 2;
+	    player2.hand[2] = numOre2;
+	    player2.hand[3] = numGrain2;
+	    p2VictoryPoints += 1;
+	    if(victoryPoints() == true){
+		System.out.println(p2Win);
+	    }
+	    return true;
+	}else{
+	    System.out.println(cityError);
+	    return false;
+	}
+    }  
 }
 
