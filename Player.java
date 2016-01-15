@@ -113,5 +113,8 @@ public class player{//creates player object
 	    return false;
 	}
     }
+    public boolean p1CanPurchaseCity(){
+	if(player1.hand[
+    }
 }
 
