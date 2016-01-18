@@ -22,8 +22,8 @@ public class MakeTiles extends JComponent {
     //
     public static int[][] pointGrid(int ratio) {
 
-	//-------CREATES A GRID OF 1 AND 0, 1 = VERTICIES OF HEXAGONS ----
-	//for a 3-4-3 hex
+	//-------creates a coordinate plane with each dot a 1 or 0, with 1 = verticies of hexagons ----
+	//meant for 3-4-3 hex
 
 	//makes sure ratio is an odd number so that the mod later works smoothly
 	if (ratio%2 == 0) {

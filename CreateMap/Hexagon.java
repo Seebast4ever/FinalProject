@@ -38,6 +38,34 @@ public class Hexagon {
     public int getLineListLength() {
 	return lineList.size();
     }
+
+
+    //Helps get each hex's production number
+    public Coordinate getMiddleCoordinate() {
+	int sumx = 0;
+	int sumy = 0;
+	for (int i = 0; i < lineList.size(); i++) {
+	    sumx += lineList.get(i).getX1();
+	    sumy += lineList.get(i).getY1();
+	}
+	return new Coordinate(sumx/6, sumy/6);
+    }
+
+    public int getMiddleX() {
+	int sumx = 0;
+	for (int i = 0; i < lineList.size(); i++) {
+	    sumx += lineList.get(i).getX1();
+	}
+	return sumx/6;
+    }
+
+    public int getMiddleY() {
+	int sumy = 0;
+	for (int i = 0; i < lineList.size(); i++) {
+	    sumy += lineList.get(i).getY1();
+	}
+	return sumy/6;
+    }
 }
 
 

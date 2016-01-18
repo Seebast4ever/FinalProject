@@ -25,4 +25,15 @@ public class Line {
     public int getY1() {return c1.getY();}
     public int getY2() {return c2.getY();}
 
+    public int getSlope() {
+	if (getX1() - getX2() == 0) {
+	    return 0;
+	} else {
+	    return (getY1() - getY2()) / (getX1() - getX2());
+	}
+    }
+
+    public String seeLine() {
+	return "("+getX1()+", "+getY1()+") - ("+getX2()+", "+getY2()+")";
+    }
 }
