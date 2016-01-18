@@ -1,14 +1,10 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class initWorld extends JPanel{
+public class initWorld extends JPanel implements ActionListener{
     int[][] gridPoint = MakeTiles.pointGrid(51);
     Coordinate[] points = MakeTiles.points(gridPoint, 100, 50);
     Hexagon[] hexes = MakeTiles.makeHexagon(points);
@@ -28,6 +24,7 @@ public class initWorld extends JPanel{
 
 	for (int i = 0; i < points.length; i++) {
 	    //the color scheme needs to be fixed (players need to know whose settlement is whose
+	    //may instead use filled rectangles in filled rectangles to indicate cities/settlements
 
 	    //tests
 	    //points[i].setSettlement(true);
@@ -46,8 +43,40 @@ public class initWorld extends JPanel{
 	}
     }
 
+    //Creates buttons, world, etc.
+
+    public void actionPerformed(ActionEvent e) {
+	if (e.getSource() == buyBox) {
+	    String thingToBuy = (String)((JComboBox)e.getSource()).getSelectedItem();
+	    if (thingToBuy.equals("Road")) {
+		//add code here
+		int x = 5;
+	    } else if (thingToBuy.equals("Settlement")) {
+		//add code here
+	    } else if (thingToBuy.equals("City")) {
+		//add code here
+	    } else {
+		//add code here
+	    }
+	}
+    }
+    
+    JButton endTurn = new JButton("End turn?");
+    
+    String[] choices = {"Road", "Settlement", "City"};
+    JComboBox buyBox = new JComboBox(choices);
+    JButton buy = new JButton("Buy!");
+
+    
+
+    public initWorld() {
+	buyBox.addActionListener(this);
+	add(endTurn);
+	
+    }
+    
     public static void main(String[]args) {
-	initWorld p = new initWorld(new GridBagLayout());
+	initWorld p = new initWorld();
 
 	JFrame f = new JFrame();
 	f.setVisible(true);
@@ -55,8 +84,5 @@ public class initWorld extends JPanel{
 	f.add(p);
 	f.setSize(1000, 600);
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	JButton endTurn = new JButton("End turn?");
-	JButton 
     }
 }
