@@ -1,4 +1,5 @@
 public class player{//creates player object
+    String howToPlay = "Welcome to Settlers of GUI, a version of the board game Settlers of Catan created by Sebastian Iturregui-Shelton and Chang Ju Kim of Stuyvesant High School. The game starts by Player 1 placing their first two settlement and roads down on corners of the hexagons. "
     int numBrick1 = 0;
     int numWool1 = 0;
     int numOre1 = 0;
