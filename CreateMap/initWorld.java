@@ -6,20 +6,21 @@ import javax.swing.*;
 
 public class initWorld extends JPanel implements ActionListener{
     int[][] gridPoint = MakeTiles.pointGrid(51);
-    Coordinate[] points = MakeTiles.points(gridPoint, 100, 50);
+    Coordinate[] points = MakeTiles.points(gridPoint, 450, 75);
     Hexagon[] hexes = MakeTiles.makeHexagon(points);
 
     /*
       only calls paint once... thus cannot update for new settlements/cities
       may want to call repaint in paint instead. Might make game a bit slow, but can now be updated.
     */
-    public void paint(Graphics g) {
+
+    public void paintComponent(Graphics g) {
 	g.setColor(Color.BLACK);
 	for (int h = 0; h < hexes.length; h++) {
 	    for (int l = 0; l < 6; l++) {
 		Line line = hexes[h].getLine(l); 
 		g.drawLine(line.getX1(), line.getY1(), line.getX2(), line.getY2());
-	    }				 
+	    }
 	}
 
 	for (int i = 0; i < points.length; i++) {
@@ -42,7 +43,7 @@ public class initWorld extends JPanel implements ActionListener{
 	    }
 	}
     }
-
+    
     //Creates buttons, world, etc.
 
     public void actionPerformed(ActionEvent e) {
@@ -66,13 +67,18 @@ public class initWorld extends JPanel implements ActionListener{
     String[] choices = {"Road", "Settlement", "City"};
     JComboBox buyBox = new JComboBox(choices);
     JButton buy = new JButton("Buy!");
-
     
 
     public initWorld() {
 	buyBox.addActionListener(this);
 	add(endTurn);
-	
+
+	this.add(buyBox);
+	this.add(buy);
+	this.add(endTurn);
+	this.setComponentZOrder(buyBox, 0);
+	this.setComponentZOrder(buy, 0);
+	this.setComponentZOrder(endTurn, 0);
     }
     
     public static void main(String[]args) {
@@ -84,5 +90,7 @@ public class initWorld extends JPanel implements ActionListener{
 	f.add(p);
 	f.setSize(1000, 600);
 	f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	p.repaint(450, 75, 600, 600);
+
     }
 }
