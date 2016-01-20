@@ -1,5 +1,5 @@
 public class player{//creates player object
-    String howToPlay = "Welcome to Settlers of GUI, a version of the board game Settlers of Catan created by Sebastian Iturregui-Shelton and Chang Ju Kim of Stuyvesant High School. The game starts by Player 1 placing their first two settlement and roads down on corners of the hexagons. "
+    String howToPlay = "Welcome to Settlers of GUI, a version of the board game Settlers of Catan created by Sebastian Iturregui-Shelton and Chang Ju Kim of Stuyvesant High School. The game starts by Player 1 placing their first two settlement and roads down on corners of the hexagons. ";
     int numBrick1 = 0;
     int numWool1 = 0;
     int numOre1 = 0;
@@ -46,7 +46,7 @@ public class player{//creates player object
     //hand[3] is Grain
     //hand[4] is Lumber
     public player(){
-	hand[] = new int[5];
+	hand = new int[5];
     }
     
     public static void main(String[]args){
@@ -79,19 +79,7 @@ public class player{//creates player object
 	    return true;
 	}
     }
-    public boolean p1CanPurchaseRoad(){
-	if(player1.hand[0] <= 1 && player1.hand[4] <= 1){
-	    numBrick1 = numBrick1 - 1;
-	    numLumber1 = numLumber1 - 1;
-	    player1.hand[0] = numBrick1;
-	    player1.hand[4] = numLumber1;
-	    return true;
-	}else{
-	    System.out.println(roadError);//need to be printed to a GUI label, not the terminal
-	    return false;
-	}
-    }
-    public boolean p2CanPurchaseRoad(){
+    public boolean canPurchaseRoad(){
 	if(player2.hand[0] <= 1 && player2.hand[4] <= 1){
 	    numBrick2 = numBrick2 - 1;
 	    numLumber2 = numLumber2 - 1;
