@@ -4,8 +4,8 @@ ArrayList<player> allPlayers = new ArrayList<player>();//every time a new player
 
 void setup(){
   frameRate(30);
-  size(1080, 900);
-  background(100, 100, 100);
+  size(1080, 720);
+  background(256, 256, 256);
 }
 void draw(){//lots of this code is in the repo I linked you
   
