@@ -1,4 +1,3 @@
-
 //Creates the location of vertecies and hexagons.
 //Modify this parameter to change the size of the board itself (will also modify its location)
 int[][] gridPoint = MakeTiles.pointGrid(50);
@@ -6,7 +5,18 @@ int[][] gridPoint = MakeTiles.pointGrid(50);
 Coordinate[] points = MakeTiles.points(gridPoint, 350, 100);
 Hexagon[] hexes = MakeTiles.makeHexagon(points);
 
+//checks if mouse was clicked
+boolean clicked = false;
+
+RectButton settlementButton;
+RectButton cityButton;
+RectButton roadButton;
+RectButton endTurnButton;
+
+
 void setup() {
+  
+  //~~~~~~~~~~~Game Board
   size(1000, 550);
   background(150);
   noStroke();
@@ -22,7 +32,16 @@ void setup() {
   }
   //puts the middle number of a hexagon
   putMiddleNumber();
+
+
+  //~~~~~~~~~Buttons
+  settlementButton = new RectButton(30, 100, 150, 30, "Make a settlement!", 10);
+  cityButton = new RectButton(30, 150, 150, 30, "Make a city!", 10);
+  roadButton = new RectButton(30, 200, 150, 30, "Make a road!", 10);
+  endTurnButton = new RectButton(30, 350, 150, 30, "End your turn!", 10);
 }
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Game board and Player hand~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //puts a middle number in each hexagon. Currently puts 1 to 10
 void putMiddleNumber() {
@@ -55,7 +74,43 @@ void updatePlayerHand(int initialX, int initialY, int cardWidth, int cardHeight,
   }
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Mouse click~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+void mouseClicked() {
+  clicked = true;
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+int rollDie() {
+  //returns the result of rolling two die
+   return (int)random(1, 7) + (int)random(1, 7); 
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 void draw() {
-  RectButton b = new RectButton(30, 200, 100, 30, "Testing button!!", 12);
+  if (clicked) {
+     if (settlementButton.updateMouseOver()) {
+        System.out.println("built a settlement!!");
+        //makes sure one mouse-click isn't misread as several
+        clicked = false;
+     }
+     
+     if (cityButton.updateMouseOver()) {
+        System.out.println("built a city!!");
+        clicked = false;
+     }
+     
+     if (roadButton.updateMouseOver()) {
+        System.out.println("built a road!!");
+        clicked = false;
+     }
+     
+     if (endTurnButton.updateMouseOver()) {
+        System.out.println("Ended turn!!");
+        clicked = false;
+     }
+  }
   updatePlayerHand(400, 15, 50, 65, 5, 6);
+  
 }
