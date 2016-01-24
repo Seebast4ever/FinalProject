@@ -111,6 +111,7 @@ void draw() {
         clicked = false;
      }
   }
+  
   updatePlayerHand(400, 15, 50, 65, 5, 6);
   
 }
