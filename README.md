@@ -20,3 +20,17 @@ Sebastian Iturregui-Shelton
 Sebastian Iturregui-Shelton
 
 	  -Created Settlement, Road, and City object files in processing. Created ArrayLists to track these. Changed the color and dimensions of the base game board in order to fit my screen size, and so that the asthetic is both pleasing and similar to the original game board background
+
+1-22-2016
+
+Sebastian Iturregui-Shelton
+
+	  -Created start menu outline, edited text arrangement and color and added a button to select two players. Selecting the button will start the main file running. 
+
+1-25-2016
+
+Sebastian Iturregui-Shelton
+
+	-Combined code with partner, tested code to make sure it compiles/runs properly and efficiently. 
+
+

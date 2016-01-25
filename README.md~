@@ -19,4 +19,4 @@ Sebastian Iturregui-Shelton
 
 Sebastian Iturregui-Shelton
 
-	  -Created Settlement, Road, and City object files in processing. Created ArrayLists to track these. 
+	  -Created Settlement, Road, and City object files in processing. Created ArrayLists to track these. Changed the color and dimensions of the base game board in order to fit my screen size, and so that the asthetic is both pleasing and similar to the original game board background
