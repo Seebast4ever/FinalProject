@@ -3,14 +3,11 @@ ArrayList<player> allPlayers = new ArrayList<player>();//every time a new player
 ArrayList<gamePiece> allGamePieces = new ArrayList<gamePiece>();//every time a new game piece is created, add it to this ArrayList so we can keep track of them
 int State;
 int rectX, rectY;      // Position of square button
-int circleX, circleY;  // Position of circle button
 int rectSize = 90;     // Diameter of rect
-int circleSize = 93;   // Diameter of circle
-color rectColor, circleColor, baseColor;
-color rectHighlight, circleHighlight;
+color rectColor, baseColor;
+color rectHighlight;
 color currentColor;
 boolean rectOver = false;
-boolean circleOver = false;
 
 
 void setup() {
@@ -20,10 +17,6 @@ void setup() {
   State = 0;
   rectColor = color(255);
   rectHighlight = color(51);
-  circleColor = color(255);
-  circleHighlight = color(204);
-  circleX = width/2+circleSize/2+10;
-  circleY = height/2;
   rectX = 390;
   rectY = 430;
   //ellipseMode(CENTER);
@@ -52,16 +45,15 @@ void draw() {//lots of this code is in the repo I linked you
 }
 void mousePressed() {
   if (rectOver) {
-    System.out.println("Pressed!");
+    exit();
   }
 }
 
 void update(int x, int y) {
   if ( overRect(rectX, rectY, rectSize, rectSize) ) {
     rectOver = true;
-    circleOver = false;
   } else {
-    circleOver = rectOver = false;
+    rectOver = false;
   }
 }
 
