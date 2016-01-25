@@ -32,7 +32,6 @@ void draw() {//lots of this code is in the repo I linked you
     text("A digital project designed by:", 310, 160);
     text("Sebastian Iturregui-Shelton and Chang Ju Kim", 170, 200);
     text("To start, select number of players:", 278, 400); 
-    text("Two Players", 400, 470);
     update(mouseX, mouseY);
     if (rectOver) {
       fill(rectHighlight);

@@ -1,3 +1,7 @@
+//CHANGE: easy ctrl-f letting coder change certain aspects of code
+//ADD: easy ctrl-f telling coder to add features
+
+
 //Creates the location of vertecies and hexagons.
 //Modify this parameter to change the size of the board itself (will also modify its location)
 int[][] gridPoint = MakeTiles.pointGrid(50);
@@ -19,6 +23,7 @@ RectButton endTurnButton;
 void setup() {
 
   //~~~~~~~~~~~Game Board
+  //CHANGE: Game size
   size(1000, 550);
   background(150);
   noStroke();
@@ -28,6 +33,7 @@ void setup() {
     for (int l = 0; l < 6; l++) {
       Line lines = hexes[h].getLine(l);
       //change color of lines
+      //CHANGE: hexagon line colors
       stroke(102, 254, 0);
       line(lines.getX1(), lines.getY1(), lines.getX2(), lines.getY2());
     }
@@ -37,6 +43,7 @@ void setup() {
 
 
   //~~~~~~~~~Buttons
+  //CHANGE: Location of buttons
   settlementButton = new RectButton(30, 100, 150, 30, "Make a settlement!", 10);
   cityButton = new RectButton(30, 150, 150, 30, "Make a city!", 10);
   roadButton = new RectButton(30, 200, 150, 30, "Make a road!", 10);
@@ -48,12 +55,15 @@ void setup() {
 //puts a middle number in each hexagon. Currently puts 1 to 10
 void putMiddleNumber() {
   //change size of text
+  //CHANGE: Size of middle number in hexagons
   textSize(40);
   //change color of the number
+  //CHANGE: color of the number
   fill(300, 50, 0);
   for (int i = 0; i < hexes.length; i++) {
     Hexagon hex = hexes[i];
     //puts location of the text. modify -11, +15 to adjust and ensure proper middle-ness
+    //CHANGE: look above comment :D
     text(""+(i+1), hex.getMiddleX()-11, hex.getMiddleY()+15);
   }
 }
@@ -63,10 +73,16 @@ void putMiddleNumber() {
 void updatePlayerHand(int initialX, int initialY, int cardWidth, int cardHeight, int p1NumCards, int p2NumCards) {
   //player 1's hand (top)
 
+  //ADD: Production card (log,sheep,clay...) indicator using filled colors
+  //CHANGE: Border color
+  //ADD: show amount of each card in players hand, using numbers underneath
+
   //color of shaded 
   fill(0, 200, 200);
   //color of border
   stroke(300, 100, 0);
+  
+  //CHANGE: <cardWidth + x> space between cards
   for (int i = 0; i < p1NumCards; i++) {
     //cardWidth + x ensures that there is a distance of x apart from each card.
     rect(initialX + i * (cardWidth + 10), initialY, cardWidth, cardHeight);
@@ -85,6 +101,7 @@ void updatePoints() {
   for (int i = 0; i < points.length; i++) {
     points[i].setSettlement(true);
     points[i].setCity(true);
+    //CHANGE: Size of the settlement/city
     if (points[i].hasSettlement()) {
       drawSettlement(points[i], 8);
     }
@@ -100,7 +117,7 @@ void drawCity(Coordinate c, int offset) {
   offset = offset * 2;
   int x = c.getX();
   int y = c.getY();
-  ellipse(x, y, 16, 16);
+  ellipse(x, y, offset, offset);
 
 
   /*  Hexagon h = new Hexagon(x-5, y+5, x, y+10, x+5, y+5, x+5, y-5, x, y-10, x-5, y-5);
@@ -122,6 +139,7 @@ void updateRoads() {
   for (int i = 0; i < lines.size(); i++) {
     lines.get(i).setHasRoad(true);
     if (lines.get(i).hasRoad()) {
+      //CHANGE: size of road
       drawRoad(lines.get(i), 5);
     }
   }
@@ -178,7 +196,9 @@ int rollDie() {
 
 void draw() {
   if (clicked) {
+    //ADD: When clicked, check if can build etc
     if (settlementButton.updateMouseOver()) {
+      
       System.out.println("built a settlement!!");
       //makes sure one mouse-click isn't misread as several
       clicked = false;
@@ -193,6 +213,8 @@ void draw() {
       System.out.println("built a road!!");
       clicked = false;
     }
+    
+    //ADD: end turn feature
 
     if (endTurnButton.updateMouseOver()) {
       System.out.println("Ended turn!!");
@@ -200,6 +222,7 @@ void draw() {
     }
   }
   updateBoard();
+  //CHANGE: ??? (down)
   updatePlayerHand(400, 15, 50, 65, 5, 6);
   //  System.out.println("Mouse: ("+mouseX+", "+mouseY+")");
 }
