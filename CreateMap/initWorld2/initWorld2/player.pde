@@ -1,10 +1,12 @@
+
 class player {//creates player object
+  ArrayList<Settlement> mySettlements = new ArrayList<Settlement>();
   String howToPlay = "Welcome to Settlers of GUI, a version of the board game Settlers of Catan created by Sebastian Iturregui-Shelton and Chang Ju Kim of Stuyvesant High School. The game starts by Player 1 placing their first two settlement and roads down on corners of the hexagons. ";
-  int numBrick = 0;
-  int numWool = 0;
-  int numOre = 0;
-  int numGrain = 0;
-  int numLumber = 0;
+  int numBrick = 10;
+  int numWool = 10;
+  int numOre = 10;
+  int numGrain = 10;
+  int numLumber = 10;
 
   int victoryPoints = 2;//sets the number of Victory Points to two, as each player places two settlements to begin the game. Players need 10 Victory Points to win, with Settlements adding 1 point per construction and Cities being worth 2 points, though they replace existing Settlements and as such only add one to the current amount of points
 
@@ -113,4 +115,10 @@ void main(String[]args) {
       return false;
     }
   }
+  
+  void createSettlement(){
+  Settlement s = new Settlement(mouseX, mouseY);
+  mySettlements.add(s);
+  }
+  
 }

@@ -1,7 +1,20 @@
 //CHANGE: easy ctrl-f letting coder change certain aspects of code
 //ADD: easy ctrl-f telling coder to add features
 
+ArrayList<player> allPlayers = new ArrayList<player>();//every time a new player is created, add it to this ArrayList so they will be kept track of
 
+int numOfPlayers = 2;
+
+boolean makingS = false;
+
+int currentPlayer = 0;
+
+  int numBrick = 10;
+  int numWool = 10;
+  int numOre = 10;
+  int numGrain = 10;
+  int numLumber = 10;
+  
 //Creates the location of vertecies and hexagons.
 //Modify this parameter to change the size of the board itself (will also modify its location)
 int[][] gridPoint = MakeTiles.pointGrid(50);
@@ -41,6 +54,13 @@ void setup() {
   //puts the middle number of a hexagon
   putMiddleNumber();
 
+  if (numOfPlayers == 2) {
+      //requires button "number of players(2)"  to set numOfPlayers to 2
+      player player1 = new player();
+      //creates a new player, player1 with an empty hand
+      player player2 = new player();
+      //creates a new player, player2 with an empty hand
+  }
 
   //~~~~~~~~~Buttons
   //CHANGE: Location of buttons
@@ -183,7 +203,35 @@ void drawRoad(Line l, int offset) {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Mouse click~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void mouseClicked() {
-  clicked = true;
+      //ADD: When clicked, check if can build etc
+    if (!makingS && settlementButton.updateMouseOver()) {
+      if(allPlayers.get(currentPlayer).canPurchaseSettlement()){
+        makingS = true;
+        System.out.println("Click where you would like to build a settlement");
+      }
+      //makes sure one mouse-click isn't misread as several
+    }
+    if(makingS){
+      //ADD: we need a function to check if the mouse is over a place a settlement can be built
+      //NEEDS TO BE DONE FOR ROADS AND CITIES TOO
+      //if(correctCoordinateForSettlement(mouseX, mouseY)){
+       //allPlayers.get(currentPlayer).createSettlement(); 
+      //}
+    }
+
+    if (cityButton.updateMouseOver()) {
+      System.out.println("built a city!!");
+    }
+
+    if (roadButton.updateMouseOver()) {
+      System.out.println("built a road!!");
+    }
+    
+    //ADD: end turn feature
+
+    if (endTurnButton.updateMouseOver()) {
+      System.out.println("Ended turn!!");
+    }
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,11 +243,24 @@ int rollDie() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void draw() {
+   allPlayers.get(0).hand[0] = numBrick;
+   allPlayers.get(0).hand[1] = numWool;
+   allPlayers.get(0).hand[2] = numOre;
+   allPlayers.get(0).hand[3] = numGrain;
+   allPlayers.get(0).hand[4] = numLumber;
+   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
+    //  player2.hand[0] = numBrick;
+      //player2.hand[1] = numWool;
+      //player2.hand[2] = numOre;
+      //player2.hand[3] = numGrain;
+      //player2.hand[4] = numLumber;
+      //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
+
+  /*
   if (clicked) {
     //ADD: When clicked, check if can build etc
     if (settlementButton.updateMouseOver()) {
-      
-      System.out.println("built a settlement!!");
+      player.canPurchaseSettlement();
       //makes sure one mouse-click isn't misread as several
       clicked = false;
     }
@@ -221,6 +282,7 @@ void draw() {
       clicked = false;
     }
   }
+  */
   updateBoard();
   //CHANGE: ??? (down)
   updatePlayerHand(400, 15, 50, 65, 5, 6);
