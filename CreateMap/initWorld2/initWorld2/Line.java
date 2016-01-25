@@ -1,15 +1,18 @@
 class Line {
   private Coordinate c1;
   private Coordinate c2;
+  private boolean hasRoad;
 
   Line(Coordinate c1, Coordinate c2) {
     this.c1 = c1;
     this.c2 = c2;
+    hasRoad = false;
   }
 
   Line(int x1, int y1, int x2, int y2) {
     c1.setXY(x1, y1);
     c2.setXY(x2, y2);
+    hasRoad = false;
   }
 
   Coordinate getC1() {
@@ -34,14 +37,22 @@ class Line {
   }
 
   int getSlope() {
-    if (getX1() - getX2() == 0) {
+    if (getX2() - getX1() == 0) {
       return 0;
     } else {
-      return (getY1() - getY2()) / (getX1() - getX2());
+      return (getY2() - getY1()) / (getX2() - getX1());
     }
   }
 
-  public  String seeLine() {
+  public String seeLine() {
     return "("+getX1()+", "+getY1()+") - ("+getX2()+", "+getY2()+")";
+  }
+  
+  boolean hasRoad() {
+     return hasRoad; 
+  }
+  
+  void setHasRoad(boolean b) {
+     hasRoad = b; 
   }
 }

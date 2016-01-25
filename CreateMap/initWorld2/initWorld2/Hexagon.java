@@ -66,4 +66,14 @@ class Hexagon {
     }
     return sumy/6;
   }
+  
+  
+  /* 
+  //Don't think java files can access processing functions. For some reason hexagon.pde is not an object
+  void drawHexagon() {
+     for (int i = 0; i < 6; i++) {
+        Line line = lineList.get(i);
+        line(line.getX1(), line.getY1(), line.getX2(), line.getY2());
+     }
+  } */
 }

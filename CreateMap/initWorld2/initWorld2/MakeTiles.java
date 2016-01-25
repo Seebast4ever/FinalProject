@@ -118,6 +118,62 @@ class MakeTiles extends JComponent {
     return hexes;
   }
 
+  //returns a line list meant for adding roads
+  static ArrayList<Line> lines(Hexagon[] hexes) {
+    //60 lines, but with 19 duplicates. In no particular order.
+    ArrayList<Line> lines = new ArrayList<Line>(41);
+    boolean lineExists = false;
+    for (int h = 0; h < hexes.length; h++) {
+      for (int hexl = 0; hexl < 6; hexl++) {
+        //checks if the line is recorded yet
+        for (int l = 0; l < lines.size()  && !lineExists; l++) {
+          Line hexLine = hexes[h].getLine(hexl);
+          Line line = lines.get(l);
+          if (hexLine.getX1() == line.getX1() && hexLine.getY1() == line.getY1() && hexLine.getX2() == line.getX2() && hexLine.getY2() == line.getY2()) {
+            lineExists = true;
+          }
+        }
+        if (!lineExists) {
+         lines.add(hexes[h].getLine(hexl)); 
+        }
+      }
+    }
+    return lines;
+
+    //    return removeDuplicates(lines);
+  }
+
+  static ArrayList<Line> removeDuplicates(Line[] lines) {
+    //line list without duplicates
+    ArrayList<Line> newLines = new ArrayList<Line>(41);
+    boolean hasDuplicate = false;
+    //line to be tested
+    for (int i = 0; i < lines.length; i++) {
+
+      //lines already recorded
+      //if it doesn't have a duplicate yet, keep looking through recorded lines
+      for (int j = 0; j < newLines.size() && !hasDuplicate; j++) {
+        //if that line already exists in the answer
+        Line l = lines[i];
+        Line newl = newLines.get(j);
+        l.getC1().printCor();
+        l.getC2().printCor();
+        System.out.println(newl.getX1());
+        System.out.println(newl.getY1());
+        System.out.println(newl.getX2());
+        System.out.println(newl.getY2());
+        if (l.getX1() == newl.getX1() && l.getY1() == newl.getY1() && l.getX2() == newl.getX2() && l.getY2() == newl.getY2()) {
+          hasDuplicate = true;
+        }
+      }
+      //if that line is not recorded yet
+      if (!hasDuplicate) {
+        newLines.add(lines[i]);
+      }
+    }
+    return newLines;
+  }
+
   static void printHexCoordinates(Hexagon hex) {
     Line line0 = hex.getLine(0);
     Line line1 = hex.getLine(1);
@@ -140,40 +196,40 @@ class MakeTiles extends JComponent {
     C4.printCor();
     C5.printCor();
   }
-/*
+  /*
   static void main(String[]args) {
-    int ratio = 1;
-    int[][] pointAry = pointGrid(ratio);
-    String ans = "[";
-    for (int i = 0; i < pointAry.length; i+= ratio) {
-      ans += "\n[ ";
-      for (int j = 0; j < pointAry[i].length; j+= ratio) {
-        ans += pointAry[i][j]+", ";
-      }
-      ans += "]";
-    }
-    System.out.println(ans + "\n]");
-
-    Coordinate[] corArray = points(pointAry);
-    System.out.print("[");
-    for (int i = 0; i < corArray.length; i++) {
-      System.out.print(i+": ");
-      corArray[i].printCor();
-    }
-
-    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-    Hexagon[] hexArray = makeHexagon(corArray);
-
-
-    /*	System.out.print("[");
-     	for (int i = 0; i < hexArray.length; i++) {
-     	    System.out.print(hexArray[i]+", ");
-     	}
-     	System.out.println("]");*/
-/*
+   int ratio = 1;
+   int[][] pointAry = pointGrid(ratio);
+   String ans = "[";
+   for (int i = 0; i < pointAry.length; i+= ratio) {
+   ans += "\n[ ";
+   for (int j = 0; j < pointAry[i].length; j+= ratio) {
+   ans += pointAry[i][j]+", ";
+   }
+   ans += "]";
+   }
+   System.out.println(ans + "\n]");
+   
+   Coordinate[] corArray = points(pointAry);
+   System.out.print("[");
+   for (int i = 0; i < corArray.length; i++) {
+   System.out.print(i+": ");
+   corArray[i].printCor();
+   }
+   
+   System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+   
+   Hexagon[] hexArray = makeHexagon(corArray);
+   
+   
+                      /*	System.out.print("[");
+   	for (int i = 0; i < hexArray.length; i++) {
+   	    System.out.print(hexArray[i]+", ");
+   	}
+   	System.out.println("]");*/
+  /*
     
-    printHexCoordinates(hexArray[0]);
-  }
-  */
+   printHexCoordinates(hexArray[0]);
+   }
+   */
 }

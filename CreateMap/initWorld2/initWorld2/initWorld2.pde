@@ -5,6 +5,8 @@ int[][] gridPoint = MakeTiles.pointGrid(50);
 Coordinate[] points = MakeTiles.points(gridPoint, 350, 100);
 Hexagon[] hexes = MakeTiles.makeHexagon(points);
 
+ArrayList<Line> lines = MakeTiles.lines(hexes);
+
 //checks if mouse was clicked
 boolean clicked = false;
 
@@ -15,7 +17,7 @@ RectButton endTurnButton;
 
 
 void setup() {
-  
+
   //~~~~~~~~~~~Game Board
   size(1000, 550);
   background(150);
@@ -74,6 +76,92 @@ void updatePlayerHand(int initialX, int initialY, int cardWidth, int cardHeight,
   }
 }
 
+void updateBoard() {
+  updatePoints();
+  updateRoads();
+}
+
+void updatePoints() {
+  for (int i = 0; i < points.length; i++) {
+    points[i].setSettlement(true);
+    points[i].setCity(true);
+    if (points[i].hasSettlement()) {
+      drawSettlement(points[i], 8);
+    }
+    if (points[i].hasCity()) {
+      drawCity(points[i], 8);
+    }
+  }
+}
+
+//creates a circle for a city
+void drawCity(Coordinate c, int offset) {
+  //makes offset the radius of the circle instead
+  offset = offset * 2;
+  int x = c.getX();
+  int y = c.getY();
+  ellipse(x, y, 16, 16);
+
+
+  /*  Hexagon h = new Hexagon(x-5, y+5, x, y+10, x+5, y+5, x+5, y-5, x, y-10, x-5, y-5);
+   for (int i = 0; i < 6; i++) {
+   Line line = h.getLine(i);
+   line(line.getX1(), line.getY1(), line.getX2(), line.getY2());
+   }
+   */
+}
+
+//draws a triangle for a settlement
+void drawSettlement(Coordinate c, int offset) {
+  int x = c.getX();
+  int y = c.getY();
+  triangle(x - offset, y+offset, x + offset, y + offset, x, y - offset);
+}
+
+void updateRoads() {
+  for (int i = 0; i < lines.size(); i++) {
+    lines.get(i).setHasRoad(true);
+    if (lines.get(i).hasRoad()) {
+      drawRoad(lines.get(i), 5);
+    }
+  }
+}
+
+void drawRoad(Line l, int offset) {
+  //note: x is increasing from left to right
+  //      y is increasing from top to bottom
+
+  //if the line looks like: \
+  if (l.getSlope() == 1) {
+
+    //I use min/max because the order for X1 and X2 are mixed up
+    //extra subtraction/addition is to prevent roads from being too close to points
+    int x1 = min(l.getX1(), l.getX2()) + 10;
+    int y1 = min(l.getY1(), l.getY2()) + 10;
+    int x2 = max(l.getX1(), l.getX2()) - 10;
+    int y2 = max(l.getY1(), l.getY2()) - 10;
+    quad(x1, y1 + offset, x1 + offset, y1, x2, y2 - offset, x2 - offset, y2);
+  }
+  //if the line looks like: /
+  if (l.getSlope() == -1) {
+    int x1 = min(l.getX1(), l.getX2()) + 10;
+    int y1 = max(l.getY1(), l.getY2()) - 10;
+    int x2 = max(l.getX1(), l.getX2()) - 10;
+    int y2 = min(l.getY1(), l.getY2()) + 10;
+    quad(x1, y1 - offset, x1 + offset, y1, x2, y2 + offset, x2 - offset, y2);
+  }
+  //if the line looks like: |
+  //note: in Line.java, I made the slope = 0 if undefined.
+  if (l.getSlope() == 0) {
+    //x1 and x2 are equal
+    int x1 = l.getX1();
+    int y1 = min(l.getY1(), l.getY2()) + 6;
+    int x2 = l.getX2();
+    int y2 = max(l.getY1(), l.getY2()) - 6;
+    quad(x1 - offset, y1 + offset, x1 + offset, y1 + offset, x2 + offset, y2 - offset, x2 - offset, y2 - offset);
+  }
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Mouse click~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void mouseClicked() {
@@ -83,35 +171,35 @@ void mouseClicked() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 int rollDie() {
   //returns the result of rolling two die
-   return (int)random(1, 7) + (int)random(1, 7); 
+  return (int)random(1, 7) + (int)random(1, 7);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void draw() {
   if (clicked) {
-     if (settlementButton.updateMouseOver()) {
-        System.out.println("built a settlement!!");
-        //makes sure one mouse-click isn't misread as several
-        clicked = false;
-     }
-     
-     if (cityButton.updateMouseOver()) {
-        System.out.println("built a city!!");
-        clicked = false;
-     }
-     
-     if (roadButton.updateMouseOver()) {
-        System.out.println("built a road!!");
-        clicked = false;
-     }
-     
-     if (endTurnButton.updateMouseOver()) {
-        System.out.println("Ended turn!!");
-        clicked = false;
-     }
+    if (settlementButton.updateMouseOver()) {
+      System.out.println("built a settlement!!");
+      //makes sure one mouse-click isn't misread as several
+      clicked = false;
+    }
+
+    if (cityButton.updateMouseOver()) {
+      System.out.println("built a city!!");
+      clicked = false;
+    }
+
+    if (roadButton.updateMouseOver()) {
+      System.out.println("built a road!!");
+      clicked = false;
+    }
+
+    if (endTurnButton.updateMouseOver()) {
+      System.out.println("Ended turn!!");
+      clicked = false;
+    }
   }
-  
+  updateBoard();
   updatePlayerHand(400, 15, 50, 65, 5, 6);
-  
+  //  System.out.println("Mouse: ("+mouseX+", "+mouseY+")");
 }
