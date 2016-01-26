@@ -163,7 +163,7 @@ void drawSettlement(Coordinate c, int offset) {
 
 void updateRoads() {
   for (int i = 0; i < lines.size(); i++) {
-    lines.get(i).setHasRoad(true);
+//    lines.get(i).setHasRoad(true);
     if (lines.get(i).hasRoad()) {
       //CHANGE: size of road
       drawRoad(lines.get(i), 5);
@@ -264,10 +264,9 @@ void mouseClicked() {
     //allPlayers.get(currentPlayer).createSettlement(); 
     //}
   }
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CITY~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  if (!makingC && cityButton.updateMouseOver() && clicked == true) {
+  
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CITY~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (!makingS && cityButton.updateMouseOver() && clicked == true) {
     if (allPlayers.get(currentPlayer).canPurchaseCity()) {
       makingC = true;
       System.out.println("Click where you would like to build a city");
@@ -295,27 +294,10 @@ void mouseClicked() {
     clicked = false;
   }
 
-  if (makingC && clicked == true) {
-    boolean pressedNearPoint = false;
-    for (int i = 0; i < points.length; i++) {
-      if (points[i].isClose(mouseX, mouseY, 7) && !points[i].hasSettlement() && !points[i].hasCity()) {
-        points[i].setCity(true);
-        pressedNearPoint = true;
-        System.out.println("Built!");
-      }
-    }
-    if (!pressedNearPoint) {
-      System.out.println("You did not click on a valid place!"); 
-      allPlayers.get(currentPlayer).undoPurchaseCity();
-    }
-    makingC = false;
-    clicked = false;
-  }
-  /*
-    //this should be good for the road code
-   if (roadButton.updateMouseOver() && clicked == true) {
-   System.out.println("built a road!!");
-   
+/*
+  //this should be good for the road code
+  if (roadButton.updateMouseOver() && clicked == true) {
+    System.out.println("built a road!!");   
    
    */
   /*

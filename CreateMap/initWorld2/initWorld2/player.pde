@@ -116,6 +116,7 @@ void main(String[]args) {
       return false;
     }
   }
+  
 
   void createSettlement() {
     Settlement s = new Settlement(mouseX, mouseY);
