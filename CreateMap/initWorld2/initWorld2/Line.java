@@ -47,12 +47,21 @@ class Line {
   public String seeLine() {
     return "("+getX1()+", "+getY1()+") - ("+getX2()+", "+getY2()+")";
   }
-  
+
   boolean hasRoad() {
-     return hasRoad; 
+    return hasRoad;
   }
-  
+
   void setHasRoad(boolean b) {
-     hasRoad = b; 
+    hasRoad = b;
+  }
+
+//sees if the middle coordinate of the line is close to the mouse click
+  boolean isClose(int mousex, int mousey, int offset) {
+    //finds the middle coordinate of the road
+    int x = c1.getX() + c2.getX();
+    int y = c1.getY() + c2.getY();
+    Coordinate c = new Coordinate(x / 2, y / 2); 
+    return c.isClose(mousex, mousey, offset + 3);
   }
 }

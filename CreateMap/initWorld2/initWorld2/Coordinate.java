@@ -48,4 +48,9 @@ class Coordinate {
   void printCor() {
     System.out.println("["+x+", "+y+"]");
   }
+
+  boolean isClose(int mousex, int mousey, int offset) {
+    //looks to see if mouse is within a circle of radius offset (using pythagorean theorem)
+    return (x - mousex) * (x - mousex) + (y - mousey) * (y - mousey) < offset * offset;
+  }
 }

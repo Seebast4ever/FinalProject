@@ -9,12 +9,12 @@ boolean makingS = false;
 
 int currentPlayer = 0;
 
-  int numBrick = 10;
-  int numWool = 10;
-  int numOre = 10;
-  int numGrain = 10;
-  int numLumber = 10;
-  
+int numBrick = 10;
+int numWool = 10;
+int numOre = 10;
+int numGrain = 10;
+int numLumber = 10;
+
 //Creates the location of vertecies and hexagons.
 //Modify this parameter to change the size of the board itself (will also modify its location)
 int[][] gridPoint = MakeTiles.pointGrid(50);
@@ -55,11 +55,11 @@ void setup() {
   putMiddleNumber();
 
   if (numOfPlayers == 2) {
-      //requires button "number of players(2)"  to set numOfPlayers to 2
-      player player1 = new player();
-      //creates a new player, player1 with an empty hand
-      player player2 = new player();
-      //creates a new player, player2 with an empty hand
+    //requires button "number of players(2)"  to set numOfPlayers to 2
+    player player1 = new player();
+    //creates a new player, player1 with an empty hand
+    player player2 = new player();
+    //creates a new player, player2 with an empty hand
   }
 
   //~~~~~~~~~Buttons
@@ -101,7 +101,7 @@ void updatePlayerHand(int initialX, int initialY, int cardWidth, int cardHeight,
   fill(0, 200, 200);
   //color of border
   stroke(300, 100, 0);
-  
+
   //CHANGE: <cardWidth + x> space between cards
   for (int i = 0; i < p1NumCards; i++) {
     //cardWidth + x ensures that there is a distance of x apart from each card.
@@ -202,36 +202,70 @@ void drawRoad(Line l, int offset) {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Mouse click~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+//for building city or settlement
+Coordinate getChosenPoint() {
+}
+
+//every click action should end with "clicked = false" so that a player needs to click somewhere again.
 void mouseClicked() {
-      //ADD: When clicked, check if can build etc
-    if (!makingS && settlementButton.updateMouseOver()) {
-      if(allPlayers.get(currentPlayer).canPurchaseSettlement()){
-        makingS = true;
-        System.out.println("Click where you would like to build a settlement");
+  clicked = true;
+
+  //ADD: When clicked, check if can build etc
+  if (!makingS && settlementButton.updateMouseOver() && clicked == true) {
+    if (allPlayers.get(currentPlayer).canPurchaseSettlement()) {
+      makingS = true;
+      System.out.println("Click where you would like to build a settlement");
+      //makes sure player is forced to click somewhere again
+      clicked = false;
+    }
+    //makes sure one mouse-click isn't misread as several
+  }
+
+  //TO SEBASTIANNN: okay here's the code. It'll loop through all the vertexes and if it has a settlement, puts that as true.
+  //You don't need to automatically update it since the draw command does that.
+
+  //Do the same for city (it's basically the same, but setCity to true).
+  //Also I added a feature to mouseClicked() -- clicked = true/false. What this does is that it will prevent several code from running at once.
+  //e.g. Each *if* will check if clicked is true, and they will all make clicked false when done. Therefore, when mouseClicked is looking at the other if statements,
+  //it won't trigger them as clicked is now false. (Think of it as each click should do only one action.)
+
+  if (makingS && clicked == true) {
+    for (int i = 0; i < points.length; i++) {
+      if (points[i].isClose(mouseX, mouseY, 4)) {
+        points[i].setSettlement(true);
       }
-      //makes sure one mouse-click isn't misread as several
     }
-    if(makingS){
-      //ADD: we need a function to check if the mouse is over a place a settlement can be built
-      //NEEDS TO BE DONE FOR ROADS AND CITIES TOO
-      //if(correctCoordinateForSettlement(mouseX, mouseY)){
-       //allPlayers.get(currentPlayer).createSettlement(); 
-      //}
-    }
+    clicked = false;
+    //ADD: we need a function to check if the mouse is over a place a settlement can be built
+    //NEEDS TO BE DONE FOR ROADS AND CITIES TOO
+    //if(correctCoordinateForSettlement(mouseX, mouseY)){
+    //allPlayers.get(currentPlayer).createSettlement(); 
+    //}
+  }
 
-    if (cityButton.updateMouseOver()) {
-      System.out.println("built a city!!");
-    }
+  if (cityButton.updateMouseOver()) {
+    System.out.println("built a city!!");
+  }
 
-    if (roadButton.updateMouseOver()) {
-      System.out.println("built a road!!");
-    }
-    
-    //ADD: end turn feature
 
-    if (endTurnButton.updateMouseOver()) {
-      System.out.println("Ended turn!!");
+  //this should be good for the road code
+  if (roadButton.updateMouseOver() && clicked = true) {
+    System.out.println("built a road!!");
+    /*
+    for (int i = 0; i < lines.size(); i++) {
+      if (lines.get(i).isClose(mouseX, mouseY, 3)) {
+        lines.get(i).setHasRoad(true);
+      }
     }
+    */
+      clicked = false;
+  }
+
+  //ADD: end turn feature
+
+  if (endTurnButton.updateMouseOver()) {
+    System.out.println("Ended turn!!");
+  }
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,46 +277,46 @@ int rollDie() {
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void draw() {
-   allPlayers.get(0).hand[0] = numBrick;
-   allPlayers.get(0).hand[1] = numWool;
-   allPlayers.get(0).hand[2] = numOre;
-   allPlayers.get(0).hand[3] = numGrain;
-   allPlayers.get(0).hand[4] = numLumber;
-   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
-    //  player2.hand[0] = numBrick;
-      //player2.hand[1] = numWool;
-      //player2.hand[2] = numOre;
-      //player2.hand[3] = numGrain;
-      //player2.hand[4] = numLumber;
-      //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
+  allPlayers.get(0).hand[0] = numBrick;
+  allPlayers.get(0).hand[1] = numWool;
+  allPlayers.get(0).hand[2] = numOre;
+  allPlayers.get(0).hand[3] = numGrain;
+  allPlayers.get(0).hand[4] = numLumber;
+  //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
+  //  player2.hand[0] = numBrick;
+  //player2.hand[1] = numWool;
+  //player2.hand[2] = numOre;
+  //player2.hand[3] = numGrain;
+  //player2.hand[4] = numLumber;
+  //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
 
   /*
   if (clicked) {
-    //ADD: When clicked, check if can build etc
-    if (settlementButton.updateMouseOver()) {
-      player.canPurchaseSettlement();
-      //makes sure one mouse-click isn't misread as several
-      clicked = false;
-    }
-
-    if (cityButton.updateMouseOver()) {
-      System.out.println("built a city!!");
-      clicked = false;
-    }
-
-    if (roadButton.updateMouseOver()) {
-      System.out.println("built a road!!");
-      clicked = false;
-    }
-    
-    //ADD: end turn feature
-
-    if (endTurnButton.updateMouseOver()) {
-      System.out.println("Ended turn!!");
-      clicked = false;
-    }
-  }
-  */
+   //ADD: When clicked, check if can build etc
+   if (settlementButton.updateMouseOver()) {
+   player.canPurchaseSettlement();
+   //makes sure one mouse-click isn't misread as several
+   clicked = false;
+   }
+   
+   if (cityButton.updateMouseOver()) {
+   System.out.println("built a city!!");
+   clicked = false;
+   }
+   
+   if (roadButton.updateMouseOver()) {
+   System.out.println("built a road!!");
+   clicked = false;
+   }
+   
+   //ADD: end turn feature
+   
+   if (endTurnButton.updateMouseOver()) {
+   System.out.println("Ended turn!!");
+   clicked = false;
+   }
+   }
+   */
   updateBoard();
   //CHANGE: ??? (down)
   updatePlayerHand(400, 15, 50, 65, 5, 6);
