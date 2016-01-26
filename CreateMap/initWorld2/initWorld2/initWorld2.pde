@@ -240,8 +240,20 @@ void mouseClicked() {
     //}
   }
 
-  if (cityButton.updateMouseOver()) {
-    System.out.println("built a city!!");
+  if (!makingS && CityButton.updateMouseOver() && clicked == true) {
+    if (allPlayers.get(currentPlayer).canPurchaseCity()) {
+      makingS = true;
+      System.out.println("Click where you would like to build a city");
+      //makes sure player is forced to click somewhere again
+      clicked = false;
+    }
+    if (makingS && clicked == true) {
+    for (int i = 0; i < points.length; i++) {
+      if (points[i].isClose(mouseX, mouseY, 4)) {
+        points[i].setCity(true);
+      }
+    }
+    clicked = false;
   }
 
 
