@@ -213,6 +213,7 @@ void drawRoad(Line l, int offset) {
 void mouseClicked() {
   clicked = true;
 
+<<<<<<< HEAD
 //~~~~~~~~~~~~~~~~~~~~~ROLL DIE~~~~~~~~~~~~~~~~~~
 
   if (rollButton.updateMouseOver() && clicked == true) {
@@ -221,6 +222,16 @@ void mouseClicked() {
   }
 
 //~~~~~~~~~~~~~~~~~~~~~~SETTLEMENT~~~~~~~~~~~~~
+=======
+  //~~~~~~~~~~~~~~~~~~~~~ROLL DIE~~~~~~~~~~~~~~~~~~
+
+  if (rollButton.updateMouseOver() && clicked == true) {
+    int rolledNumber = rollDie();
+    System.out.println("You rolled: "+rolledNumber);
+  }
+
+  //~~~~~~~~~~~~~~~~~~~~~~SETTLEMENT~~~~~~~~~~~~~
+>>>>>>> ede6fd7310f76468276c1067ed9b67d03399b162
 
   //ADD: When clicked, check if can build etc
   if (!makingS && settlementButton.updateMouseOver() && clicked == true) {
@@ -266,6 +277,7 @@ void mouseClicked() {
   
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CITY~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+<<<<<<< HEAD
   if (!makingC && cityButton.updateMouseOver() && clicked == true) {
     if (allPlayers.get(currentPlayer).canPurchaseCity()) {
       makingC = true;
@@ -274,21 +286,38 @@ void mouseClicked() {
       //need to test
       System.out.println("You don't have enough material!");
   if (!makingS && CityButton.updateMouseOver() && clicked == true) {
+=======
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CITY~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  if (!makingC && cityButton.updateMouseOver() && clicked == true) {
+>>>>>>> ede6fd7310f76468276c1067ed9b67d03399b162
     if (allPlayers.get(currentPlayer).canPurchaseCity()) {
-      makingS = true;
+      makingC = true;
       System.out.println("Click where you would like to build a city");
-      //makes sure player is forced to click somewhere again
-      clicked = false;
+    } else {
+      //need to test
+      System.out.println("You don't have enough material!");
     }
-    if (makingS && clicked == true) {
+  }
+
+  if (makingC && clicked == true) {
+    boolean pressedNearPoint = false;
     for (int i = 0; i < points.length; i++) {
-      if (points[i].isClose(mouseX, mouseY, 4)) {
+      if (points[i].isClose(mouseX, mouseY, 7) && !points[i].hasSettlement() && !points[i].hasCity()) {
         points[i].setCity(true);
+        pressedNearPoint = true;
+        System.out.println("Built!");
       }
     }
+    if (!pressedNearPoint) {
+      System.out.println("You did not click on a valid place!"); 
+      allPlayers.get(currentPlayer).undoPurchaseCity();
+    }
+    makingC = false;
     clicked = false;
   }
 
+<<<<<<< HEAD
   if (makingC && clicked == true) {
     boolean pressedNearPoint = false;
     for (int i = 0; i < points.length; i++) {
@@ -311,15 +340,27 @@ void mouseClicked() {
   if (roadButton.updateMouseOver() && clicked == true) {
     System.out.println("built a road!!");
     /*
+=======
+  /*
+    //this should be good for the road code
+   if (roadButton.updateMouseOver() && clicked == true) {
+   System.out.println("built a road!!");
+   
+   
+   */
+  /*
+>>>>>>> ede6fd7310f76468276c1067ed9b67d03399b162
     for (int i = 0; i < lines.size(); i++) {
-     if (lines.get(i).isClose(mouseX, mouseY, 10)) {
-     lines.get(i).setHasRoad(true);
-     }
-     }
-     */
-    clicked = false;
-  }
+   if (lines.get(i).isClose(mouseX, mouseY, 10)) {
+   lines.get(i).setHasRoad(true);
+   }
+   }
+   */
 
+  /*      
+   clicked = false;
+   }
+   */
   //ADD: end turn feature
 
   if (endTurnButton.updateMouseOver()) {
@@ -327,31 +368,31 @@ void mouseClicked() {
   }
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-int rollDie() {
-  //returns the result of rolling two die
-  return (int)random(1, 7) + (int)random(1, 7);
-}
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  int rollDie() {
+    //returns the result of rolling two die
+    return (int)random(1, 7) + (int)random(1, 7);
+  }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-void draw() {
-  allPlayers.get(0).hand[0] = numBrick;
-  allPlayers.get(0).hand[1] = numWool;
-  allPlayers.get(0).hand[2] = numOre;
-  allPlayers.get(0).hand[3] = numGrain;
-  allPlayers.get(0).hand[4] = numLumber;
-  //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
-  //player2.hand[0] = numBrick;
-  //player2.hand[1] = numWool;
-  //player2.hand[2] = numOre;
-  //player2.hand[3] = numGrain;
-  //player2.hand[4] = numLumber;
-  //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
+  void draw() {
+    allPlayers.get(0).hand[0] = numBrick;
+    allPlayers.get(0).hand[1] = numWool;
+    allPlayers.get(0).hand[2] = numOre;
+    allPlayers.get(0).hand[3] = numGrain;
+    allPlayers.get(0).hand[4] = numLumber;
+    //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
+    //player2.hand[0] = numBrick;
+    //player2.hand[1] = numWool;
+    //player2.hand[2] = numOre;
+    //player2.hand[3] = numGrain;
+    //player2.hand[4] = numLumber;
+    //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
 
 
-  updateBoard();
-  //CHANGE: ??? (down)
-  updatePlayerHand(400, 15, 50, 65, 5, 6);
-  //  System.out.println("Mouse: ("+mouseX+", "+mouseY+")");
-}
+    updateBoard();
+    //CHANGE: ??? (down)
+    updatePlayerHand(400, 15, 50, 65, 5, 6);
+    //  System.out.println("Mouse: ("+mouseX+", "+mouseY+")");
+  }
