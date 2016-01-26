@@ -371,7 +371,7 @@ void mouseClicked() {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Rolling die/Random~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   int rollDie() {
     //returns the result of rolling two die
-    return (int)random(1, 7) + (int)random(1, 7);
+    return (int)random(1, 6) + (int)random(1, 6);
   }
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Draw function~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
