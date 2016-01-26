@@ -265,8 +265,8 @@ void mouseClicked() {
     //}
   }
   
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CITY~~~~~~~~~~~~~~~~~~~~~~~~~~
-  if (!makingS && CityButton.updateMouseOver() && clicked == true) {
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CITY~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  if (!makingS && cityButton.updateMouseOver() && clicked == true) {
     if (allPlayers.get(currentPlayer).canPurchaseCity()) {
       makingC = true;
       System.out.println("Click where you would like to build a city");
