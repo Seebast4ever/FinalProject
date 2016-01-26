@@ -29,38 +29,38 @@ class player {//creates player object
   //hand[3] is Grain
   //hand[4] is Lumber
   player() {
-    hand = new int[5];
+    hand = new int[] {0, 0, 0, 0, 0};
     allPlayers.add(this);//automatically adds every new player to the ArrayList
   }
 
-/*
+  /*
 void main(String[]args) {
-    if (numOfPlayers == 2) {
-      //requires button "number of players(2)"  to set numOfPlayers to 2
-      player player1 = new player();
-      //creates a new player, player1 with an empty hand
-      player player2 = new player();
-      //creates a new player, player2 with an empty hand
-
-      player1.hand[0] = numBrick;
-      player1.hand[1] = numWool;
-      player1.hand[2] = numOre;
-      player1.hand[3] = numGrain;
-      player1.hand[4] = numLumber;
-      //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
-      player2.hand[0] = numBrick;
-      player2.hand[1] = numWool;
-      player2.hand[2] = numOre;
-      player2.hand[3] = numGrain;
-      player2.hand[4] = numLumber;
-      //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
-    }
-  }
-  */
+   if (numOfPlayers == 2) {
+   //requires button "number of players(2)"  to set numOfPlayers to 2
+   player player1 = new player();
+   //creates a new player, player1 with an empty hand
+   player player2 = new player();
+   //creates a new player, player2 with an empty hand
+   
+   player1.hand[0] = numBrick;
+   player1.hand[1] = numWool;
+   player1.hand[2] = numOre;
+   player1.hand[3] = numGrain;
+   player1.hand[4] = numLumber;
+   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
+   player2.hand[0] = numBrick;
+   player2.hand[1] = numWool;
+   player2.hand[2] = numOre;
+   player2.hand[3] = numGrain;
+   player2.hand[4] = numLumber;
+   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
+   }
+   }
+   */
   boolean victoryPoints() {
     if (victoryPoints >= 10) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }
@@ -98,6 +98,18 @@ void main(String[]args) {
       return false;
     }
   }
+  
+  void undoPurchaseSettlement() {
+     numBrick += 1;
+     numWool += 1;
+     numGrain += 1;
+     numLumber += 1;
+     hand[0] = numBrick;
+     hand[1] = numWool;
+     hand[3] = numGrain;
+     hand[4] = numLumber;
+     victoryPoints -= 1;
+  }
 
   boolean canPurchaseCity() {
     if (hand[2] >= 3 && hand[3] >= 2) {
@@ -115,10 +127,9 @@ void main(String[]args) {
       return false;
     }
   }
-  
-  void createSettlement(){
-  Settlement s = new Settlement(mouseX, mouseY);
-  mySettlements.add(s);
+
+  void createSettlement() {
+    Settlement s = new Settlement(mouseX, mouseY);
+    mySettlements.add(s);
   }
-  
 }
