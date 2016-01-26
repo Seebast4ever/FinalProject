@@ -273,6 +273,18 @@ void mouseClicked() {
     } else {
       //need to test
       System.out.println("You don't have enough material!");
+  if (!makingS && CityButton.updateMouseOver() && clicked == true) {
+    if (allPlayers.get(currentPlayer).canPurchaseCity()) {
+      makingS = true;
+      System.out.println("Click where you would like to build a city");
+      //makes sure player is forced to click somewhere again
+      clicked = false;
+    }
+    if (makingS && clicked == true) {
+    for (int i = 0; i < points.length; i++) {
+      if (points[i].isClose(mouseX, mouseY, 4)) {
+        points[i].setCity(true);
+      }
     }
     clicked = false;
   }
@@ -330,40 +342,14 @@ void draw() {
   allPlayers.get(0).hand[3] = numGrain;
   allPlayers.get(0).hand[4] = numLumber;
   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
-  //  player2.hand[0] = numBrick;
+  //player2.hand[0] = numBrick;
   //player2.hand[1] = numWool;
   //player2.hand[2] = numOre;
   //player2.hand[3] = numGrain;
   //player2.hand[4] = numLumber;
   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
 
-  /*
-  if (clicked) {
-   //ADD: When clicked, check if can build etc
-   if (settlementButton.updateMouseOver()) {
-   player.canPurchaseSettlement();
-   //makes sure one mouse-click isn't misread as several
-   clicked = false;
-   }
-   
-   if (cityButton.updateMouseOver()) {
-   System.out.println("built a city!!");
-   clicked = false;
-   }
-   
-   if (roadButton.updateMouseOver()) {
-   System.out.println("built a road!!");
-   clicked = false;
-   }
-   
-   //ADD: end turn feature
-   
-   if (endTurnButton.updateMouseOver()) {
-   System.out.println("Ended turn!!");
-   clicked = false;
-   }
-   }
-   */
+
   updateBoard();
   //CHANGE: ??? (down)
   updatePlayerHand(400, 15, 50, 65, 5, 6);
