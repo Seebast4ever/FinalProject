@@ -303,40 +303,14 @@ void draw() {
   allPlayers.get(0).hand[3] = numGrain;
   allPlayers.get(0).hand[4] = numLumber;
   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player1, indicated by the 1 at the end
-  //  player2.hand[0] = numBrick;
+  //player2.hand[0] = numBrick;
   //player2.hand[1] = numWool;
   //player2.hand[2] = numOre;
   //player2.hand[3] = numGrain;
   //player2.hand[4] = numLumber;
   //sets the array indeces with the correct number of materials based on where they placed their settlements in the GUI. the vars are for player2, indicated by the 2 at the end
 
-  /*
-  if (clicked) {
-   //ADD: When clicked, check if can build etc
-   if (settlementButton.updateMouseOver()) {
-   player.canPurchaseSettlement();
-   //makes sure one mouse-click isn't misread as several
-   clicked = false;
-   }
-   
-   if (cityButton.updateMouseOver()) {
-   System.out.println("built a city!!");
-   clicked = false;
-   }
-   
-   if (roadButton.updateMouseOver()) {
-   System.out.println("built a road!!");
-   clicked = false;
-   }
-   
-   //ADD: end turn feature
-   
-   if (endTurnButton.updateMouseOver()) {
-   System.out.println("Ended turn!!");
-   clicked = false;
-   }
-   }
-   */
+
   updateBoard();
   //CHANGE: ??? (down)
   updatePlayerHand(400, 15, 50, 65, 5, 6);
