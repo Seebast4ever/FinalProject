@@ -333,6 +333,7 @@ void mouseClicked() {
   //ADD: end turn feature
 
   if (endTurnButton.updateMouseOver()) {
+    currentPlayer = (currentPlayer+1)%numPlayers;
     System.out.println("Ended turn!!");
   }
 }
