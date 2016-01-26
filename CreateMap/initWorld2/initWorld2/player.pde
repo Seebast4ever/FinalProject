@@ -99,17 +99,6 @@ void main(String[]args) {
     }
   }
   
-  void undoPurchaseSettlement() {
-     numBrick += 1;
-     numWool += 1;
-     numGrain += 1;
-     numLumber += 1;
-     hand[0] = numBrick;
-     hand[1] = numWool;
-     hand[3] = numGrain;
-     hand[4] = numLumber;
-     victoryPoints -= 1;
-  }
 
   boolean canPurchaseCity() {
     if (hand[2] >= 3 && hand[3] >= 2) {
@@ -132,4 +121,27 @@ void main(String[]args) {
     Settlement s = new Settlement(mouseX, mouseY);
     mySettlements.add(s);
   }
+  
+  
+  void undoPurchaseCity() {
+    numOre += 3;
+    numGrain += 2;
+    hand[2] = numOre;
+    hand[3] = numGrain;
+    victoryPoints -= 1;
+  }
+  
+  void undoPurchaseSettlement() {
+     numBrick += 1;
+     numWool += 1;
+     numGrain += 1;
+     numLumber += 1;
+     hand[0] = numBrick;
+     hand[1] = numWool;
+     hand[3] = numGrain;
+     hand[4] = numLumber;
+     victoryPoints -= 1;
+  }
+  
+  
 }
