@@ -230,6 +230,7 @@ void mouseClicked() {
     } else {
       //need to test
       System.out.println("You don't have enough material!");
+      clicked = false;
     }
     clicked = false;
   }
@@ -273,7 +274,9 @@ void mouseClicked() {
     } else {
       //need to test
       System.out.println("You don't have enough material!");
+      clicked = false;
     }
+    clicked = false;
   }
 
   if (makingC && clicked == true) {
