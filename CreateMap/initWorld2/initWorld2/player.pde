@@ -117,13 +117,6 @@ void main(String[]args) {
     }
   }
   
-  void undoPurchaseCity() {
-    numOre += 3;
-    numGrain += 2;
-    hand[2] = numOre;
-    hand[3] = numGrain;
-    victoryPoints -= 1;
-  }
 
   void createSettlement() {
     Settlement s = new Settlement(mouseX, mouseY);
