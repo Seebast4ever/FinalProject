@@ -23,7 +23,6 @@ Sebastian Iturregui-Shelton
 
 1-22-2016
 
-<<<<<<< HEAD
 Sebastian Iturregui-Shelton
 
 	  -Created start menu outline, edited text arrangement and color and added a button to select two players. Selecting the button will start the main file running. 
@@ -34,7 +33,6 @@ Sebastian Iturregui-Shelton
 
 	-Combined code with partner, tested code to make sure it compiles/runs properly and efficiently. 
 
-=======
 Chang Ju Kim
       	 -Made a rough transition to processing. Working file is for some reason in initWorld2/initWorld2/ folder.
 	 -Created the hexagon board with numbers in the middle that represents productivity.
