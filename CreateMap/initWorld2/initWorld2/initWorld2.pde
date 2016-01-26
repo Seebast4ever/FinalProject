@@ -202,9 +202,6 @@ void drawRoad(Line l, int offset) {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Mouse click~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-//for building city or settlement
-Coordinate getChosenPoint() {
-}
 
 //every click action should end with "clicked = false" so that a player needs to click somewhere again.
 void mouseClicked() {
@@ -249,7 +246,7 @@ void mouseClicked() {
 
 
   //this should be good for the road code
-  if (roadButton.updateMouseOver() && clicked = true) {
+  if (roadButton.updateMouseOver() && clicked == true) {
     System.out.println("built a road!!");
     /*
     for (int i = 0; i < lines.size(); i++) {
