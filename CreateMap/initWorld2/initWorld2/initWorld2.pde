@@ -2,12 +2,11 @@
 //ADD: easy ctrl-f telling coder to add features
 
 ArrayList<player> allPlayers = new ArrayList<player>();//every time a new player is created, add it to this ArrayList so they will be kept track of
+int currentPlayer = 0;
 
 int numOfPlayers = 2;
 
 boolean makingS = false;
-
-int currentPlayer = 0;
 
 int numBrick = 10;
 int numWool = 10;
@@ -60,6 +59,9 @@ void setup() {
     //creates a new player, player1 with an empty hand
     player player2 = new player();
     //creates a new player, player2 with an empty hand
+
+    allPlayers.add(player1);
+    allPlayers.add(player2);
   }
 
   //~~~~~~~~~Buttons
@@ -119,8 +121,8 @@ void updateBoard() {
 
 void updatePoints() {
   for (int i = 0; i < points.length; i++) {
-    points[i].setSettlement(true);
-    points[i].setCity(true);
+    //    points[i].setSettlement(true);
+    //    points[i].setCity(true);
     //CHANGE: Size of the settlement/city
     if (points[i].hasSettlement()) {
       drawSettlement(points[i], 8);
@@ -212,10 +214,11 @@ void mouseClicked() {
     if (allPlayers.get(currentPlayer).canPurchaseSettlement()) {
       makingS = true;
       System.out.println("Click where you would like to build a settlement");
-      //makes sure player is forced to click somewhere again
-      clicked = false;
+    } else {
+      //need to test
+      System.out.println("You don't have enough material!");
     }
-    //makes sure one mouse-click isn't misread as several
+    clicked = false;
   }
 
   //TO SEBASTIANNN: okay here's the code. It'll loop through all the vertexes and if it has a settlement, puts that as true.
@@ -227,11 +230,19 @@ void mouseClicked() {
   //it won't trigger them as clicked is now false. (Think of it as each click should do only one action.)
 
   if (makingS && clicked == true) {
+    boolean pressedNearPoint = false;
     for (int i = 0; i < points.length; i++) {
-      if (points[i].isClose(mouseX, mouseY, 4)) {
+      if (points[i].isClose(mouseX, mouseY, 7)) {
         points[i].setSettlement(true);
+        pressedNearPoint = true;
+        System.out.println("Built!");
       }
     }
+    if (!pressedNearPoint) {
+      System.out.println("You did not click on a valid place!"); 
+      allPlayers.get(currentPlayer).undoPurchaseSettlement();
+    }
+    makingS = false;
     clicked = false;
     //ADD: we need a function to check if the mouse is over a place a settlement can be built
     //NEEDS TO BE DONE FOR ROADS AND CITIES TOO
@@ -250,12 +261,12 @@ void mouseClicked() {
     System.out.println("built a road!!");
     /*
     for (int i = 0; i < lines.size(); i++) {
-      if (lines.get(i).isClose(mouseX, mouseY, 3)) {
-        lines.get(i).setHasRoad(true);
-      }
-    }
-    */
-      clicked = false;
+     if (lines.get(i).isClose(mouseX, mouseY, 10)) {
+     lines.get(i).setHasRoad(true);
+     }
+     }
+     */
+    clicked = false;
   }
 
   //ADD: end turn feature
